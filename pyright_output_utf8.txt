@@ -1,0 +1,7 @@
+﻿c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\database\mongodb.py
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\database\mongodb.py:7:34 - error: Type "None" is not assignable to declared type "AsyncIOMotorClient[Unknown]"
+  ┬á┬á"None" is not assignable to "AsyncIOMotorClient[Unknown]" (reportAssignmentType)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\database\mongodb.py:14:8 - error: Cannot assign to attribute "db" for class "Database"
+  ┬á┬áExpression of type "AsyncIOMotorDatabase[Unknown]" cannot be assigned to attribute "db" of class "Database"
+  ┬á┬á┬á┬á"AsyncIOMotorDatabase[Unknown]" is not assignable to "None" (reportAttributeAccessIssue)
+2 errors, 0 warnings, 0 informations

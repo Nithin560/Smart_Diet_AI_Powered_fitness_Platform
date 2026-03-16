@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+
+:root {
+  --primary: 160 84% 39%;
+  --background: 222 47% 11%;
+  --radius: 1rem;
+}
+
+@layer base {
+  body {
+    background-color: #020617; /* slate-950 */
+    color: #f1f5f9; /* slate-200 */
+  }
+  
+  ::selection {
+    background-color: rgba(16, 185, 129, 0.3); /* emerald-500 with opacity */
+  }
+}
+
+@layer components {
+  .glass {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .card-glass {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2.5rem;
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-glass:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .btn-primary {
+    padding: 0.625rem 1.5rem;
+    background-color: #059669; /* emerald-600 */
+    color: white;
+    font-weight: 700;
+    border-radius: 0.75rem;
+    transition: all 0.2s;
+    box-shadow: 0 10px 15px -3px rgba(6, 78, 59, 0.4);
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background-color: #10b981; /* emerald-500 */
+  }
+
+  .btn-primary:active {
+    transform: scale(0.95);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .section-heading {
+    font-size: 0.875rem;
+    font-weight: 900;
+    color: #94a3b8; /* slate-400 */
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #1e293b; /* slate-800 */
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #334155; /* slate-700 */
+}

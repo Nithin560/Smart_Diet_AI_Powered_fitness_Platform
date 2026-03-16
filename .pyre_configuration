@@ -1,0 +1,14 @@
+{
+    "source_directories": [
+        {
+            "import_root": "c:/Users/nithi/OneDrive/Desktop/Smart_Food_Diet_System/backend",
+            "source": "."
+        }
+    ],
+    "search_path": [
+        "c:/Users/nithi/OneDrive/Desktop/Smart_Food_Diet_System/backend",
+        "c:/Users/nithi/OneDrive/Desktop/Smart_Food_Diet_System/venv/Lib/site-packages"
+    ],
+    "site_package_search_strategy": "pep561",
+    "python_version": "3.10"
+}
