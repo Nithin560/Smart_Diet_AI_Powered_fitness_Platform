@@ -88,8 +88,14 @@ export default function AdminDashboard() {
 
     return (
         <div className="min-h-screen bg-[#020617] text-slate-200 font-sans selection:bg-primary/30 p-4 lg:p-8 relative overflow-hidden">
-            {/* Ambient Background Effects */}
-            <div className="fixed inset-0 overflow-hidden pointer-events-none">
+            {/* Fixed Background Image with Overlay */}
+            <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+                <img 
+                    src="https://images.unsplash.com/photo-1551288049-bbda38a5f452?q=80&w=2000&auto=format&fit=crop" 
+                    alt="Admin Background" 
+                    className="w-full h-full object-cover opacity-20 contrast-125"
+                />
+                <div className="absolute inset-0 bg-[#020617]/85 backdrop-blur-sm" />
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 blur-[120px] rounded-full animate-pulse" />
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 blur-[120px] rounded-full animate-pulse delay-700" />
             </div>
