@@ -91,11 +91,11 @@ export default function AdminDashboard() {
             {/* Fixed Background Image with Overlay */}
             <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
                 <img 
-                    src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?q=80&w=2000&auto=format&fit=crop" 
-                    alt="Admin Background" 
-                    className="w-full h-full object-cover opacity-30 contrast-100"
+                    src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2000&auto=format&fit=crop" 
+                    alt="Healthy Food Background" 
+                    className="w-full h-full object-cover opacity-20 contrast-100"
                 />
-                <div className="absolute inset-0 bg-[#020617]/70" />
+                <div className="absolute inset-0 bg-[#020617]/80 backdrop-blur-[2px]" />
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 blur-[120px] rounded-full animate-pulse" />
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 blur-[120px] rounded-full animate-pulse delay-700" />
             </div>
