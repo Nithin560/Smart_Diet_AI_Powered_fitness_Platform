@@ -1,6 +1,7 @@
 from services.calculator_service import calculate_bmi, calculate_bmr, calculate_daily_calories
 from services.weather_service import get_current_weather
 from services.ai_service import get_personalized_meal_insight
+from typing import List, Dict, Any, Optional, cast
 from database.mongodb import db
 import random
 
@@ -51,15 +52,15 @@ async def generate_daily_meal_plan(user: dict, city: str = "New York") -> dict:
     target_calories = calculate_daily_calories(bmr, user["activity_level"], user["goal"])
     
     # Calculate Daily Protein Target (1.6g per kg of body weight)
-    target_protein = round(user.get("weight", 70.0) * 1.6, 1)
+    target_protein = float(f"{user.get('weight', 70.0) * 1.6:.1f}")
     
     # 2. Get Weather
     weather = await get_current_weather(city)
     weather_type = weather["type"]
     
     # 3. Attempt Gemini AI Meal Generation (Prioritized)
-    from services.ai_service import generate_unique_meal_plan
-    ai_meals = await generate_unique_meal_plan(user, weather)
+    from services.ai_service import generate_daily_meal_plan_ai
+    ai_meals = await generate_daily_meal_plan_ai(user, weather)
 
     if ai_meals:
         plan = ai_meals
@@ -78,26 +79,29 @@ async def generate_daily_meal_plan(user: dict, city: str = "New York") -> dict:
                 food["id"] = str(food.pop("_id"))
                 categorized_foods[category].append(food)
                 
-        plan = {}
-        total_planned_calories = 0
-        total_planned_protein = 0
+        plan: Dict[str, Any] = {}
+        total_planned_calories: int = 0
+        total_planned_protein: float = 0.0
         
         for category in ["breakfast", "lunch", "dinner", "snack"]:
             if categorized_foods[category]:
-                sorted_by_protein = sorted(categorized_foods[category], key=lambda x: x.get("protein", 0), reverse=True)
-                top_choices = sorted_by_protein[:2]
-                selected = random.choice(top_choices)
+                category_list = cast(List[Dict[str, Any]], list(categorized_foods[category]))
+                sorted_by_protein = sorted(category_list, key=lambda x: float(str(x.get("protein", 0))), reverse=True)
+                top_choices = cast(List[Dict[str, Any]], sorted_by_protein[0:2])
+                selected = cast(Dict[str, Any], random.choice(top_choices))
                 plan[category] = selected
-                total_planned_calories += selected.get("calories", 0)
-                total_planned_protein += selected.get("protein", 0.0)
+                total_planned_calories = int(total_planned_calories) + int(selected.get("calories", 0))
+                total_planned_protein = float(total_planned_protein) + float(selected.get("protein", 0.0))
             else:
                 plan[category] = None
             
     # 4. Calculate Algorithm Score
     health_score_data = calculate_health_score(
-        target_calories, total_planned_calories, 
-        target_protein, total_planned_protein, 
-        weather_type
+        float(target_calories), 
+        float(total_planned_calories), 
+        float(target_protein), 
+        float(total_planned_protein), 
+        str(weather_type)
     )
     
     # 5. Get AI Insight (Quick 2-sentence summary)
@@ -121,7 +125,7 @@ async def generate_daily_meal_plan(user: dict, city: str = "New York") -> dict:
         },
         "weather": weather,
         "total_planned_calories": total_planned_calories,
-        "total_planned_protein": round(total_planned_protein, 1),
+        "total_planned_protein": float(f"{total_planned_protein:.1f}"),
         "health_score": health_score_data,
         "ai_insight": ai_insight,
         "meals": plan

@@ -372,10 +372,13 @@ export default function Login() {
                               />
                             </div>
                             <button type="submit" className="btn-primary w-full py-4 mt-2" disabled={loading || loginSuccess || otpCode.length !== 6}>
-                                {loginSuccess ? 'Validating...' : loading ? 'Authenticating...' : 'Establish Secure Session'}
+                                {loginSuccess ? 'Validating...' : loading ? 'Authenticating...' : (
+                                  <>Establish Secure <br /> Section</>
+                                )}
                             </button>
                             <button type="button" className="w-full text-center text-xs font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors flex items-center justify-center gap-2" onClick={() => switchView('otp-request')}>
-                                <ShieldCheck size={14} /> Re-transmit credential
+                                <ShieldCheck size={14} /> 
+                                <span>Re-transmit <br /> Credential</span>
                             </button>
                           </motion.form>
                         )}

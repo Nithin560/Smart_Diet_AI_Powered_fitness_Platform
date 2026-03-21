@@ -6,8 +6,29 @@ settings = get_settings()
 
 
 class Database:
-    client: Optional[AsyncIOMotorClient] = None
-    db: Optional[AsyncIOMotorDatabase] = None
+    def __init__(self):
+        self._client: Optional[AsyncIOMotorClient] = None
+        self._db: Optional[AsyncIOMotorDatabase] = None
+
+    @property
+    def client(self) -> AsyncIOMotorClient:
+        if self._client is None:
+            raise RuntimeError("Database client not initialized.")
+        return self._client
+
+    @client.setter
+    def client(self, value: Optional[AsyncIOMotorClient]):
+        self._client = value
+
+    @property
+    def db(self) -> AsyncIOMotorDatabase:
+        if self._db is None:
+            raise RuntimeError("Database not initialized.")
+        return self._db
+
+    @db.setter
+    def db(self, value: Optional[AsyncIOMotorDatabase]):
+        self._db = value
 
 
 db = Database()

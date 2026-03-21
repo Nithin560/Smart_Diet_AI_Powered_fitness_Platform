@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional, Literal
+from typing import Optional, Literal, Dict, Any, List, cast
 from fastapi import APIRouter, Depends, HTTPException, status
 from models.user import UserResponse, UserBase, UserUpdate
 from core.deps import get_current_user
@@ -9,18 +9,20 @@ from bson import ObjectId
 router = APIRouter()
 
 @router.get("/me", response_model=UserResponse)
-async def read_users_me(current_user: dict = Depends(get_current_user)):
+async def read_users_me(current_user: Dict[str, Any] = Depends(get_current_user)):
     """Get current user details."""
-    current_user["id"] = str(current_user["_id"])
-    return current_user
+    res_user = {**current_user}
+    res_user["id"] = str(res_user["_id"])
+    return res_user
 
 @router.put("/me", response_model=UserResponse)
-async def update_user_me(user_in: UserUpdate, current_user: dict = Depends(get_current_user)):
+async def update_user_me(user_in: UserUpdate, current_user: Dict[str, Any] = Depends(get_current_user)):
     """Update current user profile metrics."""
     update_data = user_in.model_dump(exclude_unset=True)
     if not update_data:
-        current_user["id"] = str(current_user["_id"])
-        return current_user
+        res_user = {**current_user}
+        res_user["id"] = str(res_user["_id"])
+        return res_user
         
     database = db.db
     if database is None:
@@ -43,11 +45,13 @@ async def update_user_me(user_in: UserUpdate, current_user: dict = Depends(get_c
     )
     
     updated_user = await database["users"].find_one({"_id": current_user["_id"]})
-    if updated_user is None:
+    # Defensive cast to Dict[str, Any] to avoid union/Never issues in linter
+    res_user = cast(Dict[str, Any], {**updated_user} if updated_user else {})
+    if not res_user:
         raise HTTPException(status_code=404, detail="User not found")
         
-    updated_user["id"] = str(updated_user["_id"])
-    return updated_user
+    res_user["id"] = str(res_user["_id"])
+    return res_user
 
 from pydantic import BaseModel
 class WaterUpdate(BaseModel):
@@ -66,10 +70,13 @@ async def update_user_water(water_in: WaterUpdate, current_user: dict = Depends(
             "last_water_update": datetime.utcnow()
         }}
     )
-    
     updated_user = await database["users"].find_one({"_id": current_user["_id"]})
-    updated_user["id"] = str(updated_user["_id"])
-    return updated_user
+    if updated_user is None:
+        raise HTTPException(status_code=404, detail="User not found after water update")
+    
+    res_user = dict(updated_user) if updated_user else {}
+    res_user["id"] = str(res_user["_id"])
+    return res_user
 
 class MealLogIn(BaseModel):
     meal_type: Literal["breakfast", "lunch", "dinner", "snack"]
@@ -94,10 +101,13 @@ async def log_user_meal(meal_in: MealLogIn, current_user: dict = Depends(get_cur
         {"_id": current_user["_id"]},
         {"$push": {"meal_logs": meal_entry}}
     )
-    
     updated_user = await database["users"].find_one({"_id": current_user["_id"]})
-    updated_user["id"] = str(updated_user["_id"])
-    return updated_user
+    if updated_user is None:
+        raise HTTPException(status_code=404, detail="User not found after meal log")
+    
+    res_user = dict(updated_user) if updated_user else {}
+    res_user["id"] = str(res_user["_id"])
+    return res_user
 
 @router.delete("/me/meals/today", response_model=UserResponse)
 async def reset_today_meals(current_user: dict = Depends(get_current_user)):
@@ -110,10 +120,13 @@ async def reset_today_meals(current_user: dict = Depends(get_current_user)):
         {"_id": current_user["_id"]},
         {"$pull": {"meal_logs": {"date": today_str}}}
     )
-    
     updated_user = await database["users"].find_one({"_id": current_user["_id"]})
-    updated_user["id"] = str(updated_user["_id"])
-    return updated_user
+    if updated_user is None:
+        raise HTTPException(status_code=404, detail="User not found after meal reset")
+    
+    res_user = dict(updated_user) if updated_user else {}
+    res_user["id"] = str(res_user["_id"])
+    return res_user
 
 class FavoriteMealToggle(BaseModel):
     meal_name: str
@@ -133,10 +146,13 @@ async def toggle_favorite_meal(fav_in: FavoriteMealToggle, current_user: dict = 
         {"_id": current_user["_id"]},
         update_op
     )
-    
     updated_user = await database["users"].find_one({"_id": current_user["_id"]})
-    updated_user["id"] = str(updated_user["_id"])
-    return updated_user
+    if updated_user is None:
+        raise HTTPException(status_code=404, detail="User not found after favorites toggle")
+    
+    res_user: Dict[str, Any] = {**updated_user}
+    res_user["id"] = str(res_user["_id"])
+    return res_user
 
 @router.get("/", response_model=list[UserResponse])
 async def read_all_users(current_user: dict = Depends(get_current_user)):
@@ -190,25 +206,28 @@ async def get_admin_stats(current_user: dict = Depends(get_current_user)):
         return {"total_users": 0, "avg_bmi": 0, "goal_distribution": []}
 
     # Calculate average BMI
-    total_bmi = 0
-    valid_bmi_count = 0
+    total_bmi: float = 0.0
+    valid_bmi_count: int = 0
     goal_counts = {"weight_loss": 0, "maintain": 0, "weight_gain": 0}
 
-    for u in users:
+    user_list = cast(List[Dict[str, Any]], list(users))
+    for u in user_list:
         # BMI Calculation
-        height_m = u.get("height", 0) / 100
-        weight_kg = u.get("weight", 0)
+        height_m = float(u.get("height", 0)) / 100.0
+        weight_kg = float(u.get("weight", 0))
         if height_m > 0 and weight_kg > 0:
-            bmi = weight_kg / (height_m * height_m)
-            total_bmi += bmi
-            valid_bmi_count += 1
+            bmi_val = float(weight_kg) / (float(height_m) * float(height_m))
+            total_bmi = float(total_bmi) + float(bmi_val)
+            valid_bmi_count = int(valid_bmi_count) + 1
             
         # Goal Distribution
-        goal = u.get("goal")
-        if goal in goal_counts:
-            goal_counts[goal] += 1
+        goal_val = str(u.get("goal") or "maintain")
+        if goal_val in goal_counts:
+            # Use explicit cast to avoid 'dict[str, int]' indexing issues
+            dc = cast(Dict[str, int], goal_counts)
+            dc[goal_val] = int(dc[goal_val]) + 1
 
-    avg_bmi = round(total_bmi / valid_bmi_count, 1) if valid_bmi_count > 0 else 0
+    avg_bmi = float(f"{(float(total_bmi) / float(valid_bmi_count)) if int(valid_bmi_count) > 0 else 0.0:.1f}")
     
     goal_distribution = [
         {"name": "Weight Loss", "value": goal_counts["weight_loss"]},

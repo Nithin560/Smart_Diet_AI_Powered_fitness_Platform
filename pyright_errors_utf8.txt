@@ -1,0 +1,52 @@
+﻿c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\ai.py
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\ai.py:21:52 - error: Argument of type "List[dict[Unknown, Unknown]] | None" cannot be assigned to parameter "chat_history" of type "list[Unknown]" in function "chat_with_ai"
+  ┬á┬áType "List[dict[Unknown, Unknown]] | None" is not assignable to type "list[Unknown]"
+  ┬á┬á┬á┬á"None" is not assignable to "list[Unknown]" (reportArgumentType)
+c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\auth.py
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\auth.py:35:17 - error: "users" is not a known attribute of "None" (reportOptionalMemberAccess)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\auth.py:80:17 - error: "users" is not a known attribute of "None" (reportOptionalMemberAccess)
+c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:62:11 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:70:26 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:71:5 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:71:30 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:93:11 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:98:26 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:99:5 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:99:30 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:109:11 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:114:26 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:115:5 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:115:30 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:132:11 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:137:26 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:138:5 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\routers\user.py:138:30 - error: Object of type "None" is not subscriptable (reportOptionalSubscript)
+c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\ai_service.py
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\ai_service.py:1:8 - error: Import "google.generativeai" could not be resolved (reportMissingImports)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\ai_service.py:58:16 - error: Type "None" is not assignable to return type "dict[Unknown, Unknown]"
+  ┬á┬á"None" is not assignable to "dict[Unknown, Unknown]" (reportReturnType)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\ai_service.py:110:16 - error: Type "None" is not assignable to return type "dict[Unknown, Unknown]"
+  ┬á┬á"None" is not assignable to "dict[Unknown, Unknown]" (reportReturnType)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\ai_service.py:112:62 - error: Expression of type "None" cannot be assigned to parameter of type "list[Unknown]"
+  ┬á┬á"None" is not assignable to "list[Unknown]" (reportArgumentType)
+c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\auth_service.py
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\auth_service.py:46:12 - error: Type "Unknown | None" is not assignable to return type "dict[Unknown, Unknown]"
+  ┬á┬áType "Unknown | None" is not assignable to type "dict[Unknown, Unknown]"
+  ┬á┬á┬á┬á"None" is not assignable to "dict[Unknown, Unknown]" (reportReturnType)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\auth_service.py:51:16 - error: Type "Literal[False]" is not assignable to return type "dict[Unknown, Unknown]"
+  ┬á┬á"Literal[False]" is not assignable to "dict[Unknown, Unknown]" (reportReturnType)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\auth_service.py:53:16 - error: Type "Literal[False]" is not assignable to return type "dict[Unknown, Unknown]"
+  ┬á┬á"Literal[False]" is not assignable to "dict[Unknown, Unknown]" (reportReturnType)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\auth_service.py:64:29 - error: "users" is not a known attribute of "None" (reportOptionalMemberAccess)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\auth_service.py:79:20 - error: "users" is not a known attribute of "None" (reportOptionalMemberAccess)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\auth_service.py:125:16 - error: Type "Literal[False]" is not assignable to return type "dict[Unknown, Unknown]"
+  ┬á┬á"Literal[False]" is not assignable to "dict[Unknown, Unknown]" (reportReturnType)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\auth_service.py:133:16 - error: Type "Literal[False]" is not assignable to return type "dict[Unknown, Unknown]"
+  ┬á┬á"Literal[False]" is not assignable to "dict[Unknown, Unknown]" (reportReturnType)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\auth_service.py:137:16 - error: Type "Literal[False]" is not assignable to return type "dict[Unknown, Unknown]"
+  ┬á┬á"Literal[False]" is not assignable to "dict[Unknown, Unknown]" (reportReturnType)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\auth_service.py:141:20 - error: "users" is not a known attribute of "None" (reportOptionalMemberAccess)
+c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\recommendation_service.py
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\recommendation_service.py:71:30 - error: "foods" is not a known attribute of "None" (reportOptionalMemberAccess)
+33 errors, 0 warnings, 0 informations

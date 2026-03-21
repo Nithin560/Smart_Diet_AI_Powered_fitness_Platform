@@ -1,8 +1,15 @@
 {
-    "pythonVersion": "3.10",
-    "venvPath": "c:\\Users\\nithi\\OneDrive\\Desktop\\Smart_Food_Diet_System",
-    "venv": "venv",
-    "extraPaths": [
-        "c:\\Users\\nithi\\OneDrive\\Desktop\\Smart_Food_Diet_System\\backend"
+    "include": [
+        "."
+    ],
+    "exclude": [
+        "**/node_modules",
+        "**/__pycache__",
+        "**/venv"
+    ],
+    "executionEnvironments": [
+        {
+            "root": "."
+        }
     ]
 }

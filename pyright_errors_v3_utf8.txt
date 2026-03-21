@@ -1,0 +1,4 @@
+﻿c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\ai_service.py
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\ai_service.py:11:11 - error: "configure" is not exported from module "google.generativeai" (reportPrivateImportUsage)
+  c:\Users\nithi\OneDrive\Desktop\Smart_Food_Diet_System\backend\services\ai_service.py:12:19 - error: "GenerativeModel" is not exported from module "google.generativeai" (reportPrivateImportUsage)
+2 errors, 0 warnings, 0 informations

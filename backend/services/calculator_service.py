@@ -1,14 +1,13 @@
-from models.user import UserBase
 
 def calculate_bmi(weight: float, height_cm: float) -> dict:
     height_m = height_cm / 100
-    bmi = round(weight / (height_m ** 2), 2)
+    bmi = float(f"{weight / (height_m ** 2):.2f}")
     
     if bmi < 18.5:
         category = "Underweight"
-    elif 18.5 <= bmi <= 24.9:
+    elif bmi < 25:
         category = "Normal"
-    elif 25.0 <= bmi <= 29.9:
+    elif bmi < 30:
         category = "Overweight"
     else:
         category = "Obese"
@@ -20,20 +19,20 @@ def calculate_bmr(user: dict) -> float:
     # For men: BMR = 10W + 6.25H - 5A + 5
     # For women: BMR = 10W + 6.25H - 5A - 161
     
-    weight = user.get("weight", 70.0)
-    height = user.get("height", 170.0)
-    age = user.get("age", 30)
-    gender = user.get("gender", "other")
+    weight = user.get("weight") or 70.0
+    height = user.get("height") or 170.0
+    age = user.get("age") or 30
+    gender = (user.get("gender") or "other").lower()
     
-    base_bmr = (10 * weight) + (6.25 * height) - (5 * age)
+    base_bmr = (10 * float(weight)) + (6.25 * float(height)) - (5 * int(age))
     
     if gender == "male":
-        return round(base_bmr + 5, 2)
+        return float(f"{base_bmr + 5:.2f}")
     elif gender == "female":
-        return round(base_bmr - 161, 2)
+        return float(f"{base_bmr - 161:.2f}")
     else:
         # Average it out if other
-        return round(base_bmr - 78, 2)
+        return float(f"{base_bmr - 78:.2f}")
 
 def calculate_daily_calories(bmr: float, activity_level: str, goal: str) -> int:
     activity_multipliers = {
@@ -54,4 +53,4 @@ def calculate_daily_calories(bmr: float, activity_level: str, goal: str) -> int:
     else:
         target_calories = maintenance_calories
         
-    return int(round(target_calories, 0))
+    return int(float(f"{target_calories:.0f}"))

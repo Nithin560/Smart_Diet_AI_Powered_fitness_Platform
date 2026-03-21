@@ -2,6 +2,7 @@ import google.generativeai as genai
 from core.config import get_settings
 import json
 import logging
+from typing import Optional, List
 from services.nutrition_service import validate_meal_macros
 
 settings = get_settings()
@@ -49,7 +50,7 @@ async def get_personalized_meal_insight(user_metrics: dict, weather: dict, curre
     except:
         return "This meal plan is perfectly balanced to hit your macros while keeping you energized for the day."
 
-async def generate_unique_meal_plan(user: dict, weather: dict) -> dict:
+async def generate_daily_meal_plan_ai(user: dict, weather: dict) -> Optional[dict]:
     """
     Generates a 100% unique, structured daily meal plan using Gemini.
     Incorporates user traits and a dynamic seed to ensure 1000+ users get different results.
@@ -109,7 +110,7 @@ async def generate_unique_meal_plan(user: dict, weather: dict) -> dict:
         print(f"Gemini Meal Generation Error: {e}")
         return None
 
-async def chat_with_ai(user_query: str, chat_history: list = None) -> str:
+async def chat_with_ai(user_query: str, chat_history: Optional[List[dict]] = None) -> str:
     """
     Conversational AI for the Health Chatbot.
     """

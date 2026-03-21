@@ -12,8 +12,6 @@ from core.config import get_settings
 
 async def get_user_by_email(email: str) -> Optional[dict]:
     database = db.db
-    if database is None:
-        raise HTTPException(status_code=503, detail="Database not ready")
     user = await database.users.find_one({"email": email})
     return user
 
@@ -31,8 +29,6 @@ async def create_user(user: UserCreate) -> dict:
     user_dict["created_at"] = datetime.utcnow()
     
     database = db.db
-    if database is None:
-        raise HTTPException(status_code=503, detail="Database not ready")
         
     # Initialize weight history with the starting weight
     user_dict["weight_history"] = [{
@@ -43,14 +39,16 @@ async def create_user(user: UserCreate) -> dict:
     result = await database.users.insert_one(user_dict)
     
     created_user = await database.users.find_one({"_id": result.inserted_id})
+    if created_user is None:
+        raise HTTPException(status_code=500, detail="Failed to create user")
     return created_user
 
-async def authenticate_user(email: str, password: str) -> dict:
+async def authenticate_user(email: str, password: str) -> Optional[dict]:
     user = await get_user_by_email(email)
     if not user:
-        return False
+        return None
     if not verify_password(password, user["hashed_password"]):
-        return False
+        return None
     return user
 
 async def reset_user_password(email: str, new_password: str) -> bool:
@@ -119,10 +117,10 @@ async def generate_and_store_otp(email: str) -> str:
     
     return otp_code
 
-async def verify_otp_and_login(email: str, otp_code: str) -> dict:
+async def verify_otp_and_login(email: str, otp_code: str) -> Optional[dict]:
     user = await get_user_by_email(email)
     if not user:
-        return False
+        return None
         
     # Check if OTP exists and matches
     stored_otp = user.get("otp_code")
@@ -130,11 +128,11 @@ async def verify_otp_and_login(email: str, otp_code: str) -> dict:
     
     if not stored_otp or stored_otp != otp_code:
         print(f"DEBUG OTP: Mismatch! Stored: '{stored_otp}', Received: '{otp_code}'. Match: {stored_otp == otp_code}")
-        return False
+        return None
         
     if not otp_expires_at or datetime.utcnow() > otp_expires_at:
         print(f"DEBUG OTP: Expired! Expiry: {otp_expires_at}, Current: {datetime.utcnow()}")
-        return False
+        return None
         
     # OTP is valid. Clear it so it can't be reused.
     database = db.db

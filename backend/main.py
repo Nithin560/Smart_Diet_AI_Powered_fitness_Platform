@@ -8,7 +8,7 @@ app = FastAPI(title="Smart Diet & Weather-Based Recommendation API")
 # Setup CORS for the React frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, restrict this to frontend domain
+    allow_origins=["https://smartDietPlatform.com", "http://localhost:5173"], # Production domain and local dev
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -1,7 +1,7 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt  # type: ignore[import-untyped]
-from typing import Optional
+from typing import Optional, Dict, Any
 from core.config import get_settings
 from database.mongodb import db
 
@@ -9,7 +9,7 @@ settings = get_settings()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
 
-async def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
+async def get_current_user(token: str = Depends(oauth2_scheme)) -> Dict[str, Any]:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -32,7 +32,8 @@ async def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
             detail="Database connection not established",
         )
     user = await database.users.find_one({"email": email})
-    if user is None:
+    if not user:
         raise credentials_exception
 
-    return user
+    user_dict: Dict[str, Any] = dict(user)
+    return user_dict
