@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api', // FastAPI backend URL
+    baseURL: import.meta.env.VITE_API_BASE_URL || 
+             (window.location.hostname === 'localhost' ? 'http://localhost:8000/api' : '/_/backend/api'), // Support local and Vercel services
     headers: {
         'Content-Type': 'application/json',
     },

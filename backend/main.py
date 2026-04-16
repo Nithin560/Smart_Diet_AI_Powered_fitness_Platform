@@ -8,7 +8,7 @@ app = FastAPI(title="Smart Diet & Weather-Based Recommendation API")
 # Setup CORS for the React frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://smartDietPlatform.com", "http://localhost:5173", "http://localhost"], # Production domain, local dev, and Docker local
+    allow_origins=["https://smart-diet-ai-powered-fitness-platf.vercel.app", "http://localhost:5173", "http://localhost"], # Production Vercel domain, local dev, and Docker local
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
