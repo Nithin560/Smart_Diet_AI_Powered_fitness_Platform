@@ -3,7 +3,8 @@
   "venvPath": "c:\\Users\\nithi\\OneDrive\\Desktop\\Smart_Food_Diet_System",
   "venv": "venv",
   "include": [
-    "backend"
+    "backend",
+    "tmp"
   ],
   "executionEnvironments": [
     {
