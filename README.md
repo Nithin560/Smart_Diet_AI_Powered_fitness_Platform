@@ -68,6 +68,7 @@ Our unique algorithm evaluates your daily plan across 4 dimensions:
 2. **Protein Saturation**: Meeting muscle recovery requirements.
 3. **Weather Bio-reactivity**: Adjusting nutrients for hydration or thermogenesis.
 4. **Workout Balance**: Ensuring the plan fuels the specific muscle groups targeted.
+5. **Water Tracker**: Tracks the Water Intake.
 
 ---
 
