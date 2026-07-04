@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# Smart Food Diet System 🥗✨
+# Smart Food Diet System 🥗
 
 A premium, AI-powered nutrition platform that provides personalized meal and workout recommendations based on your health goals and local weather conditions.
 
