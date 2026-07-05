@@ -13,7 +13,7 @@ A premium, AI-powered nutrition platform that provides personalized meal and wor
   
 ---
 
-## Getting Started 🚀
+## Getting Started 
 
 ### Prerequisites
 - Python 3.9+
