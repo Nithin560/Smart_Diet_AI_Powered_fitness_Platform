@@ -49,7 +49,7 @@ Uses Google Gemini to generate:
 - **Target Macros**: Dynamic calculation of Protein, Carb, and Fat targets based on user goals (Weight Loss, Muscle Gain, or Maintenance).
 
 ### 🌦️ **Weather-Aware Nutrition**
-- Integrates with OpenWeather API (mapped via service) to adjust hydration and meal suggestions based on the user's local climate.
+- Integrates Automated OpenWeather API (mapped via service) to adjust hydration and meal suggestions based on the user's local climate.
 
 ### 🛡️ **Admin Command Center**
 - **User Management**: Complete registry of all system users.
