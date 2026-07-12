@@ -60,6 +60,8 @@ A premium, AI-powered nutrition platform that provides personalized meal and wor
    npm run dev
    ```
 
+   Docker Containers
+
 ---
 
 ## Algorithm: Smart Health Score 🧠
