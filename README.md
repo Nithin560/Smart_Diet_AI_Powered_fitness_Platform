@@ -16,7 +16,7 @@ A premium, AI-powered nutrition platform that provides personalized meal and wor
 ## Getting Started 
 
 ### Prerequisites
-- Python 3.9+
+- Python 3.10+
 - Node.js 16+
 - MongoDB instance (Local or Atlas)
 
