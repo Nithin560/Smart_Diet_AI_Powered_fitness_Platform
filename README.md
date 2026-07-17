@@ -10,6 +10,7 @@ A premium, AI-powered nutrition platform that provides personalized meal and wor
 - **Premium UI**: Modern glassmorphism design with Framer Motion animations.
 - **Progress Tracking**: Visual charts for weight and nutrient intake.
 - **Grocery List**: Auto-generated shopping lists from your meal plan.
+- **PDF MEAL GENERATOR**: you can Download a PDF format Meal Suggestion.
   
 ---
 
