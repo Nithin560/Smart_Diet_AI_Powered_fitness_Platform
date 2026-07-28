@@ -5,7 +5,7 @@ A premium, AI-powered nutrition platform that provides personalized meal and wor
 
 ## Features
 - **Smart Health Score**: Proprietary algorithm evaluating your daily plan alignment.
-- **AI Recommendations**: Personalized meal suggestions (Veg/Non-Veg).
+- **AI Recommendations**: Personalized meal suggestions (Veg/Non-Veg)
 - **Weather Integration**: Dynamic plan adjustments based on local environmental factors Using weather API.
 - **Premium UI**: Modern glassmorphism design with Framer Motion animations.
 - **Progress Tracking**: Visual charts for weight and nutrient intake.
