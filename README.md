@@ -9,7 +9,7 @@ A premium, AI-powered nutrition platform that provides personalized meal and wor
 - **Weather Integration**: Dynamic plan adjustments based on local environmental factors Using weather API.
 - **Premium UI**: Modern glassmorphism design with Framer Motion animations.
 - **Progress Tracking**: Visual charts for weight and nutrient intake.
-- **Grocery List**: Auto-generated shopping lists from your meal plan.
+- **Grocery List**: Auto-generated shopping lists from your meal plan
 - **PDF MEAL GENERATOR**: you can Download a PDF format Meal Suggestion.
 - **Admin Analysis**: The admin Can Analyze the User accounts.
 - **Admin Dashboard**: We have a Separate Dashboard for the admin 
